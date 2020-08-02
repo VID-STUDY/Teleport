@@ -92,7 +92,6 @@ def check_channel(update, context):
             photo_message = context.bot.send_photo(chat_id=user_id, photo=image)
             message = context.bot.send_message(chat_id=user_id, text=referral_message,
                                                reply_markup=referral_keyboard, parse_mode=ParseMode.HTML)
-            context.user_data['referral_photo_id'] = photo_message.message_id
         else:
             if update.message:
                 message = update.message.reply_text(text=referral_message, reply_markup=referral_keyboard, parse_mode=ParseMode.HTML)
@@ -111,6 +110,10 @@ def check_channel(update, context):
                                            message_id=context.user_data['referral_photo_id'])
             except BadRequest:
                 pass
+        try:
+            context.user_data['referral_photo_id'] = photo_message.message_id
+        except NameError:
+            pass
         context.user_data['referral_message_id'] = message.message_id
 
 
