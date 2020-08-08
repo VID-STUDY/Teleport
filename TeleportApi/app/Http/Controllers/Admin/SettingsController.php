@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Settings;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -40,20 +41,22 @@ class SettingsController extends Controller
         $settings->update($data);
         $image = $request->file('partners_ad_image');
         if ($image) {
-            $extension = $image->getClientOriginalExtension();
-            $filename = Str::random() . '.' . $extension;
-            $filepath = Storage::disk('public')->getDriver()->getAdapter()->getPathPrefix() . $filename;
-            Storage::disk('public')->put($filename, File::get($image));
-            $settings->partners_ad_image = $filepath;
+            $settings->partners_ad_image = $this->saveImage($image);
             $settings->save();
         }
         $image = $request->file('partners_ad_image_uz');
         if ($image) {
-            $extension = $image->getClientOriginalExtension();
-            $filename = Str::random() . '.' . $extension;
-            $filepath = Storage::disk('public')->getDriver()->getAdapter()->getPathPrefix() . $filename;
-            Storage::disk('public')->put($filename, File::get($image));
-            $settings->partners_ad_image_uz = $filepath;
+            $settings->partners_ad_image_uz = $this->saveImage($image);
+            $settings->save();
+        }
+        $image = $request->file('support_image_ru');
+        if ($image) {
+            $settings->support_image_ru = $this->saveImage($image);
+            $settings->save();
+        }
+        $image = $request->file('support_image_uz');
+        if ($image) {
+            $settings->support_image_uz = $this->saveImage($image);
             $settings->save();
         }
         return redirect()->route('admin.settings.index');
@@ -75,5 +78,14 @@ class SettingsController extends Controller
         }
         $settings->save();
         return redirect()->route('admin.settings.index');
+    }
+
+    private function saveImage(UploadedFile $image)
+    {
+        $extension = $image->getClientOriginalExtension();
+        $filename = Str::random() . '.' . $extension;
+        $filepath = Storage::disk('public')->getDriver()->getAdapter()->getPathPrefix() . $filename;
+        Storage::disk('public')->put($filename, File::get($image));
+        return $filepath;
     }
 }

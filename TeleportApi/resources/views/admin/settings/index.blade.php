@@ -125,6 +125,25 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="support_ru">Поддержка</label>
+                            <textarea name="support_ru" id="support_ru" class="form-control">{!! $settings->support_ru !!}</textarea>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <div class="form-material">
+                                <label for="support_image_ru">Изображение раздела поддержки</label>
+                                <input type="file" name="support_image_ru" id="support_image_ru" class="form-control">
+                            </div>
+                        </div>
+                        @if ($settings->support_image_ru)
+                            <img src="{{ asset('storage/' . $settings->getSupportImageRu()) }}" alt="" class="img-thumbnail w-50">
+                        @endif
+                    </div>
+                </div>
                 <h2 class="content-heading">Настройка текста на узбекском языке</h2>
                 <div class="row">
                     <div class="col-sm-12">
@@ -174,6 +193,25 @@
                             <label for="news_uz">Новости</label>
                             <textarea name="news_uz" id="news_uz" class="form-control">{!! $settings->news_uz !!}</textarea>
                         </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="support_uz">Поддержка</label>
+                            <textarea name="support_uz" id="support_uz" class="form-control">{!! $settings->support_uz !!}</textarea>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <div class="form-material">
+                                <label for="support_image_uz">Изображение раздела поддержки</label>
+                                <input type="file" name="support_image_uz" id="support_image_uz" class="form-control">
+                            </div>
+                        </div>
+                        @if ($settings->support_image_uz)
+                            <img src="{{ asset('storage/' . $settings->getSupportImageUz()) }}" alt="" class="img-thumbnail w-50">
+                        @endif
                     </div>
                 </div>
             </div>

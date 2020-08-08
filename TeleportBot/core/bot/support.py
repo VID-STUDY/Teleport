@@ -1,7 +1,7 @@
 from telegram.ext import ConversationHandler, MessageHandler, CallbackQueryHandler, Filters as TelegramFilters
 from telegram import ParseMode
 
-from core.services import users
+from core.services import users, settings
 from core.resources import strings, keyboards, images
 from .utils import Filters, Navigation
 from config import Config
@@ -23,9 +23,19 @@ def start(update, context):
         return ConversationHandler.END
     context.user_data['has_action'] = True
     language = context.user_data['user'].get('language')
-    support_message = strings.get_string('support.welcome', language).format(name=context.user_data['user'].get('name'))
+    bot_settings = settings.get_settings()
+    support_message = bot_settings.get('support_' + language)
+    if not support_message:
+        support_message = strings.get_string('support.welcome', language).format(name=context.user_data['user'].get('name'))
     support_keyboard = keyboards.get_keyboard('support.cancel', language)
-    image = images.get_support_image(language)
+    image = None
+    if bot_settings.get('support_image_' + language):
+        try:
+            image = open(bot_settings.get('support_image_' + language), 'rb')
+        except FileNotFoundError:
+            pass
+    if not image:
+        image = images.get_support_image(language)
     if image:
         chat_id = update.message.chat_id
         message = context.bot.send_photo(chat_id=chat_id, photo=image, caption=support_message,
@@ -41,6 +51,7 @@ def support(update, context):
     if strings.get_string('cancel', language) in update.message.text:
         canceled_message = strings.get_string('support.canceled', language)
         update.message.reply_text(canceled_message)
+        context.bot.delete_message(chat_id=update.effective_chat.id, message_id=context.user_data['support_message'].message_id)
         Navigation.to_main_menu(update, language, user_name=context.user_data['user'].get('name'))
         del context.user_data['has_action']
         return ConversationHandler.END

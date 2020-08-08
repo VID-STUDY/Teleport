@@ -12,7 +12,8 @@ class Settings extends Model
         'contractor_tariff_1', 'contractor_tariff_2', 'contractor_tariff_3',
         'faq', 'about', 'partners', 'news',
         'faq_uz', 'about_uz', 'partners_uz', 'news_uz',
-        'partners_tariffs', 'partners_tariffs_uz'
+        'partners_tariffs', 'partners_tariffs_uz',
+        'support_ru', 'support_uz'
     ];
 
     public static function get()
@@ -34,5 +35,15 @@ class Settings extends Model
     public function getAdImageUz()
     {
         return '/storage/' . File::basename($this->partners_ad_image_uz);
+    }
+
+    public function getSupportImageRu()
+    {
+        return File::basename($this->support_image_ru);
+    }
+
+    public function getSupportImageUz()
+    {
+        return File::basename($this->support_image_uz);
     }
 }
