@@ -85,7 +85,14 @@ def check_channel(update, context):
         link = helpers.create_deep_linked_url(context.bot.get_me().username, str(user_id))
         referral_message = strings.from_referral_tender(referral_tender, language, len(invited_users), link)
         referral_keyboard = keyboards.get_keyboard('referral', language)
-        image = images.get_referral_image(language)
+        image = None
+        if referral_tender.get('image_' + language):
+            try:
+                image = open(referral_tender.get('image_' + language), 'rb')
+            except FileNotFoundError:
+                pass
+        if not image:
+            image = images.get_referral_image(language)
         if image:
             if update.callback_query:
                 context.bot.delete_message(chat_id=user_id, message_id=update.callback_query.message.message_id)

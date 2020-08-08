@@ -14,7 +14,8 @@ class ReferralTenderImage extends Migration
     public function up()
     {
         Schema::table('referral_tenders', function (Blueprint  $table) {
-            $table->string('image')->nullable();
+            $table->string('image_ru')->nullable();
+            $table->string('image_uz')->nullable();
         });
     }
 
@@ -26,7 +27,8 @@ class ReferralTenderImage extends Migration
     public function down()
     {
         Schema::table('referral_tenders', function (Blueprint  $table) {
-            $table->dropColumn('image');
+            $table->dropColumn('image_ru');
+            $table->dropColumn('image_uz');
         });
     }
 }

@@ -3,7 +3,7 @@
 @section('title', $referral->date_from. '-'. $referral->date_to)
 
 @section('content')
-    <form action="{{ route('admin.referral.update', $referral->id) }}" method="post">
+    <form action="{{ route('admin.referral.update', $referral->id) }}" method="post" enctype="multipart/form-data">
         @method('put')
         <div class="block">
             <div class="block-header block-header-default">
@@ -53,6 +53,30 @@
                                 {!! $referral->uz_description !!}
                             </textarea>
                         </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-group">
+                            <div class="form-material">
+                                <label for="image_ru">Изображение RU</label>
+                                <input type="file" name="image_ru" id="image_ru" class="form-control">
+                            </div>
+                        </div>
+                        @if ($referral->image_ru)
+                            <img src="{{ asset('storage/' . $referral->getImageRu()) }}" alt="" class="img-thumbnail">
+                        @endif
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-group">
+                            <div class="form-material">
+                                <label for="image_uz">Изображение UZ</label>
+                                <input type="file" name="image_uz" id="image_uz" class="form-control">
+                            </div>
+                        </div>
+                        @if ($referral->image_uz)
+                            <img src="{{ asset('storage/' . $referral->getImageUz()) }}" alt="" class="img-thumbnail">
+                        @endif
                     </div>
                 </div>
                 <div class="d-flex align-items-center justify-content-between   ">

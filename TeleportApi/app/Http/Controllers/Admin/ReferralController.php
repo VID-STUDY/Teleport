@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use App\ReferralTender;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ReferralController extends Controller
 {
@@ -51,6 +55,16 @@ class ReferralController extends Controller
         $referralTender = ReferralTender::create($data);
         foreach ($request->get('levels') as $level) {
             $referralTender->levels()->create($level);
+        }
+        $image = $request->file('image_ru');
+        if ($image) {
+            $referralTender->image_ru = $this->saveImage($image);
+            $referralTender->save();
+        }
+        $image = $request->file('image_uz');
+        if ($image) {
+            $referralTender->image_uz = $this->saveImage($image);
+            $referralTender->save();
         }
         return redirect()->route('admin.referral.index');
     }
@@ -98,6 +112,18 @@ class ReferralController extends Controller
         foreach ($request->get('levels') as $level) {
             $referral->levels()->create($level);
         }
+        $image = $request->file('image_ru');
+        if ($image) {
+            File::delete($referral->image_ru);
+            $referral->image_ru = $this->saveImage($image);
+            $referral->save();
+        }
+        $image = $request->file('image_uz');
+        if ($image) {
+            File::delete($referral->image_uz);
+            $referral->image_uz = $this->saveImage($image);
+            $referral->save();
+        }
         return redirect()->route('admin.referral.index');
     }
 
@@ -113,5 +139,13 @@ class ReferralController extends Controller
         $referral->levels()->delete();
         $referral->delete();
         return redirect()->route('admin.referral.index');
+    }
+
+    private function saveImage(UploadedFile $image)
+    {
+        $filename = Str::random() . '.' . $image->getClientOriginalExtension();
+        $filepath = Storage::disk('public')->getDriver()->getAdapter()->getPathPrefix() . $filename;
+        Storage::disk('public')->put($filename, File::get($image));
+        return $filepath;
     }
 }

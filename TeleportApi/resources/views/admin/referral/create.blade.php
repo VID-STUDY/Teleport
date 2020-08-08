@@ -3,7 +3,7 @@
 @section('title', 'Создать реферальный конкурс')
 
 @section('content')
-    <form action="{{ route('admin.referral.store') }}" method="post">
+    <form action="{{ route('admin.referral.store') }}" method="post" enctype="multipart/form-data">
         <div class="block">
             <div class="block-header block-header-default">
                 <h3 class="block-title">Создать реферальный конкурс</h3>
@@ -47,6 +47,24 @@
                             <label for="uz_description">Описание UZ</label>
                             <textarea name="uz_description" id="uz_description"
                                       class="form-control"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-group">
+                            <div class="form-material">
+                                <label for="image_ru">Изображение RU</label>
+                                <input type="file" name="image_ru" id="image_ru" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-group">
+                            <div class="form-material">
+                                <label for="image_uz">Изображение UZ</label>
+                                <input type="file" name="image_uz" id="image_uz" class="form-control">
+                            </div>
                         </div>
                     </div>
                 </div>

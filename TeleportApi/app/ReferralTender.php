@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\File;
 
 class ReferralTender extends Model
 {
@@ -19,5 +20,15 @@ class ReferralTender extends Model
     {
         $now = now()->format('Y-m-d');
         return self::where('date_from', '<=', $now)->where('date_to', '>=', $now)->first();
+    }
+
+    public function getImageRu()
+    {
+        return File::basename($this->image_ru);
+    }
+
+    public function getImageUz()
+    {
+        return File::basename($this->image_uz);
     }
 }
