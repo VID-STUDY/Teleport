@@ -2,7 +2,7 @@ from telegram.ext import ConversationHandler, MessageHandler, CallbackQueryHandl
 from telegram import ParseMode
 
 from core.services import users, settings
-from core.resources import strings, keyboards, images
+Refrom core.resources import strings, keyboards, images, utils
 from .utils import Filters, Navigation
 from config import Config
 from . import about, account, faq, news, referral
@@ -27,6 +27,7 @@ def start(update, context):
     support_message = bot_settings.get('support_' + language)
     if not support_message:
         support_message = strings.get_string('support.welcome', language).format(name=context.user_data['user'].get('name'))
+    support_message = utils.replace_new_line(support_message)
     support_keyboard = keyboards.get_keyboard('support.cancel', language)
     image = None
     if bot_settings.get('support_image_' + language):
