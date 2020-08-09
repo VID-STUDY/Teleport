@@ -14,8 +14,8 @@ class SupportTextImage extends Migration
     public function up()
     {
         Schema::table('settings', function (Blueprint $table) {
-            $table->string('support_ru')->nullable();
-            $table->string('support_uz')->nullable();
+            $table->text('support_ru')->nullable();
+            $table->text('support_uz')->nullable();
             $table->string('support_image_ru')->nullable();
             $table->string('support_image_uz')->nullable();
         });
