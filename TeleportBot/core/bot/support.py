@@ -2,7 +2,7 @@ from telegram.ext import ConversationHandler, MessageHandler, CallbackQueryHandl
 from telegram import ParseMode
 
 from core.services import users, settings
-Refrom core.resources import strings, keyboards, images, utils
+from core.resources import strings, keyboards, images, utils
 from .utils import Filters, Navigation
 from config import Config
 from . import about, account, faq, news, referral
