@@ -131,7 +131,7 @@ class ReferralController extends Controller
             }
 
         }
-        array_multisort($result, SORT_DESC);
+        array_multisort($topReferrals, SORT_DESC);
         return \response()->json($topReferrals, 200);
     }
 }
