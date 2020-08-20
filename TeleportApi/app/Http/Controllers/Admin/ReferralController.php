@@ -10,6 +10,7 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Builder;
 
 class ReferralController extends Controller
 {
@@ -77,13 +78,21 @@ class ReferralController extends Controller
      */
     public function edit(ReferralTender $referral)
     {
-        $users = User::all();
+        $users = User::withCount(['referrals' => function (Builder $query) use ($referral) {
+            $query->where('referral_tender_id', $referral->id);
+        }])->get();
         $topReferrals = [];
-        foreach($users as $user) {
-            $invitedCount = $user->referrals()->where('referral_tender_id', $referral->id)->count();
-            if ($invitedCount > 0)
-                $topReferrals[$user->name] = $invitedCount;
+        foreach ($users as $user) {
+            if ($user->referrals_count > 0) {
+                $topReferrals[$user->name] = $user->referrals_count;
+            }
+
         }
+        // foreach($users as $user) {
+        //     $invitedCount = $user->referrals()->where('referral_tender_id', $referral->id)->count();
+        //     if ($invitedCount > 0)
+        //         $topReferrals[$user->name] = $invitedCount;
+        // }
         array_multisort($topReferrals, SORT_DESC);
         return view('admin.referral.edit', compact('referral', 'topReferrals'));
     }
