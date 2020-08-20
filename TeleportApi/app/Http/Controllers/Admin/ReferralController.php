@@ -89,13 +89,15 @@ class ReferralController extends Controller
 
         // }
 
-        $referrals = User::where('referral_tender_id', $referral->id);
+        $referrals = User::where('referral_tender_id', $referral->id)->get();
         $topReferrals = [];
         foreach ($referrals as $referralUser) {
-            if (isset($topReferrals[$referralUser->referralFrom->name])) {
-                $topReferrals[$referralUser->referralFrom->name]++;
-            } else {
-                $topReferrals[$referralUser->referralFrom->name] = 1;
+            if ($referralUser->referralFrom) {
+                if (isset($topReferrals[$referralUser->referralFrom->name])) {
+                    $topReferrals[$referralUser->referralFrom->name]++;
+                } else {
+                    $topReferrals[$referralUser->referralFrom->name] = 1;
+                }
             }
         }
         // foreach($users as $user) {
