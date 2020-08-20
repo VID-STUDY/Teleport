@@ -121,8 +121,8 @@ class ReferralController extends Controller
 
     public function topReferrals(int $referralTenderId)
     {
-        $users = User::withCount(['referrals' => function (Builder $query) use ($referral) {
-            $query->where('referral_tender_id', $referral->id);
+        $users = User::withCount(['referrals' => function (Builder $query) use ($referralTenderId) {
+            $query->where('referral_tender_id', $referralTenderId);
         }])->get();
         $topReferrals = [];
         foreach ($users as $user) {
