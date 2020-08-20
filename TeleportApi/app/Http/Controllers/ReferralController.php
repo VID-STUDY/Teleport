@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\ReferralTender;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Builder;
 
 class ReferralController extends Controller
 {
