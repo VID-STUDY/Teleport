@@ -96,12 +96,16 @@ class ReferralController extends Controller
         $tender = ReferralTender::latest('created_at')->first();
         if (!$tender)
             return response()->json(null, 200);
-        $users = User::all();
+        $referrals = User::where('referral_tender_id', $tender->id)->get();
         $topReferrals = [];
-        foreach($users as $user) {
-            $invitedCount = $user->referrals()->where('referral_tender_id', $tender->id)->count();
-            if ($invitedCount > 0)
-                $topReferrals[$user->name] = $invitedCount;
+        foreach ($referrals as $referralUser) {
+            if ($referralUser->referralFrom) {
+                if (isset($topReferrals[$referralUser->referralFrom->name])) {
+                    $topReferrals[$referralUser->referralFrom->name]++;
+                } else {
+                    $topReferrals[$referralUser->referralFrom->name] = 1;
+                }
+            }
         }
         array_multisort($topReferrals, SORT_DESC);
         $result = [
