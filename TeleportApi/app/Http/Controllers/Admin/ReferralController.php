@@ -78,15 +78,25 @@ class ReferralController extends Controller
      */
     public function edit(ReferralTender $referral)
     {
-        $users = User::withCount(['referrals' => function (Builder $query) use ($referral) {
-            $query->where('referral_tender_id', $referral->id);
-        }])->get();
-        $topReferrals = [];
-        foreach ($users as $user) {
-            if ($user->referrals_count > 0) {
-                $topReferrals[$user->name] = $user->referrals_count;
-            }
+        // $users = User::withCount(['referrals' => function (Builder $query) use ($referral) {
+        //     $query->where('referral_tender_id', $referral->id);
+        // }])->get();
+        // $topReferrals = [];
+        // foreach ($users as $user) {
+        //     if ($user->referrals_count > 0) {
+        //         $topReferrals[$user->name] = $user->referrals_count;
+        //     }
 
+        // }
+
+        $referrals = User::where('referral_tender_id', $referral->id);
+        $topReferrals = [];
+        foreach ($referrals as $referralUser) {
+            if (isset($topReferrals[$referralUser->referralFrom->name])) {
+                $topReferrals[$referralUser->referralFrom->name]++;
+            } else {
+                $topReferrals[$referralUser->referralFrom->name] = 1;
+            }
         }
         // foreach($users as $user) {
         //     $invitedCount = $user->referrals()->where('referral_tender_id', $referral->id)->count();
