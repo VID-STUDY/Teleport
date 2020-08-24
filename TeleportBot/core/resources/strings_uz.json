@@ -8,7 +8,7 @@
 
     "account.select_role": "⚙ <b>Керакли иш режимини танланг</b> <i>(режимни созламалардан ўзгартириш мумкин)</i>",
     "account.select_role.contractor": "\uD83D\uDCB5 Иш қидирувчи",
-    "account.select_role.employer": "⛏ Иш берувчи",
+    "account.select_role.employer": "💼 Иш берувчи",
     "account.select_role.selected": "✅ Иш тартиби танлаган",
     "account.change_role": "\uD83D\uDD04 Режимни танлаш",
     "account.up_balance": "\uD83D\uDCB5 Ҳисобни тўлдириш",
@@ -293,7 +293,7 @@
     "menu.faq": "\uD83D\uDCA1 Савол-жавоб",
     "menu.news": "\uD83D\uDCEC Янгиликлар",
     "menu.support": "Қўллаб-қувватлаш ☎",
-    "menu.partners": "Бизнинг ҳамкорларимиз \uD83D\uDCBC",
+    "menu.partners": "Бизнинг ҳамкорларимиз 🇺🇿",
     "menu.welcome": "Asosiy menyu \uD83E\uDD16",
 
     "account.id": "\uD83C\uDD94 - ",
