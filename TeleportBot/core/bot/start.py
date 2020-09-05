@@ -40,6 +40,8 @@ def languages(update: Update, context):
         language = 'ru'
     elif strings.get_string('languages.uz') in text:
         language = 'uz'
+    elif strings.get_string('languages.lat') in text:
+        language = 'lat'
     else:
         error()
         return LANGUAGES

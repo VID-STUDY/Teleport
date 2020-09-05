@@ -11,12 +11,17 @@ _strings_ru = json.loads(open(os.path.join(_basedir, 'strings_ru.json'), 'r', en
 # Uzbek language
 _strings_uz = json.loads(open(os.path.join(_basedir, 'strings_uz.json'), 'r', encoding='utf8').read())
 
+# Latinic language
+_strings_lat = json.loads(open(os.path.join(_basedir, 'strings_lat.json'), 'r', encoding='utf8').read())
+
 
 def get_string(key, language='ru') -> str:
     if language == 'ru':
         return _strings_ru.get(key, 'no_string')
     elif language == 'uz':
         return _strings_uz.get(key, 'no_string')
+    elif language == 'lat':
+        return _strings_lat.get(key, 'no_string')
     else:
         raise Exception('Invalid language')
 

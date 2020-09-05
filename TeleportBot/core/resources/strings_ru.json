@@ -1,6 +1,7 @@
 {
     "languages.ru": "\uD83C\uDDF7\uD83C\uDDFA Русский",
-    "languages.uz": "\uD83C\uDDFA\uD83C\uDDFF O`zbek",
+    "languages.uz": "\uD83C\uDDFA\uD83C\uDDFF Ўзбек",
+    "languages.lat": "\uD83C\uDDFA\uD83C\uDDFF O`zbekasd",
 
     "start.languages": "Выберите язык:\n\nTilni tanlang:",
     "start.welcome": "{username}, здравствуйте! Приветствуем Вас  в нашем боте \uD83E\uDD16",
@@ -8,7 +9,7 @@
 
     "account.select_role": "⚙ <b>Выберите необходимый режим работы</b> <i>(Режим можно изменить из настроек)</i>",
     "account.select_role.contractor": "\uD83D\uDCB5 Соискатель",
-    "account.select_role.employer": "⛏ Работодатель",
+    "account.select_role.employer": "💼 Работодатель",
     "account.select_role.selected": "✅ Режим работы выбран",
     "account.change_role": "\uD83D\uDD04 Выбрать режим",
     "account.up_balance": "\uD83D\uDCB5 Пополнить",
@@ -295,7 +296,7 @@
     "menu.faq": "\uD83D\uDCA1 Вопрос ответ",
     "menu.news": "\uD83D\uDCEC Новости",
     "menu.support": "Поддержка ☎",
-    "menu.partners": "Наши партнёры \uD83D\uDCBC",
+    "menu.partners": "Наши партнёры 🇺🇿",
     "menu.welcome": "Главное меню \uD83E\uDD16",
 
     "account.id": "\uD83C\uDD94 - ",

@@ -19,7 +19,7 @@ def get_keyboard(key, language='ru') -> Union[ReplyKeyboardRemove, ReplyKeyboard
     elif key == 'go_back.one_time':
         return _create_keyboard([[get_string('go_back', language)]], one_time=True)
     elif key == 'start.languages':
-        return _create_keyboard([[get_string('languages.ru', language), get_string('languages.uz')]], one_time=True)
+        return _create_keyboard([[get_string('languages.ru', language), get_string('languages.uz'), get_string('languages.lat')]], one_time=True)
     elif key == 'menu':
         keyboard = [
             [get_string('menu.cabinet', language)],
@@ -127,8 +127,13 @@ def get_keyboard(key, language='ru') -> Union[ReplyKeyboardRemove, ReplyKeyboard
     elif key == 'account.language':
         if language == 'uz':
             keyboard = [[InlineKeyboardButton(get_string('languages.ru'), callback_data='languages:ru')]]
+            keyboard = [[InlineKeyboardButton(get_string('languages.lat'), callback_data='languages:lat')]]
         elif language == 'ru':
+            keyboard = [[InlineKeyboardButton(get_string('languages.lat'), callback_data='languages:lat')]]
             keyboard = [[InlineKeyboardButton(get_string('languages.uz'), callback_data='languages:uz')]]
+        elif language == 'lat':
+            keyboard = [[InlineKeyboardButton(get_string('languages.uz'), callback_data='languages:uz')]]
+            keyboard = [[InlineKeyboardButton(get_string('languages.ru'), callback_data='languages:ru')]]
         else:
             return None
         keyboard.append([InlineKeyboardButton(get_string('go_back', language), callback_data='languages:back')])
